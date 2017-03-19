@@ -1,0 +1,8 @@
+{
+  "run_list": [
+    "recipe[protocol-hub-api]"
+  ],
+  "db": {
+    "host": "34.205.15.186"
+  }
+}
