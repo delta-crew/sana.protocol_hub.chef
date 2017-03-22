@@ -1,0 +1,17 @@
+server {
+    listen 80;
+    server_name protocol-hub-js;
+
+    access_log /var/log/nginx/protocol-hub-js.access.log;
+    error_log /var/log/nginx/protocol-hub-js.error.log;
+
+    root /opt/sana.protocol_hub.js;
+
+    location /bundle.js {
+        try_files $uri /dist/bundle.js;
+    }
+
+    location / {
+        try_files $uri /src/client/index.html;
+    }
+}

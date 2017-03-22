@@ -1,6 +1,7 @@
 {
   "run_list": [
-    "recipe[protocol-hub-api]"
+    "recipe[protocol-hub-api]",
+    "recipe[protocol-hub-js]"
   ],
   "protocol-hub-api": {
     "db": {
