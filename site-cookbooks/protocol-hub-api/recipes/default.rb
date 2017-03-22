@@ -14,6 +14,7 @@ environment = {
   'PH_API_DB_USER' => secrets['ph_api_db_user'],
   'PH_API_DB_PASSWORD' => secrets['ph_api_db_password'],
   'PH_API_DB_DATABASE' => secrets['ph_api_db_database'],
+  'PATH' => "#{application_root}/.venv/bin",
 }
 
 git application_root do
@@ -60,11 +61,17 @@ pip_requirements "#{application_root}/requirements.txt" do
   virtualenv "#{application_root}/.venv"
 end
 
+execute 'create_db' do
+  command 'invoke create_db'
+  cwd application_root
+  environment(environment)
+end
+
 supervisor_service 'gunicorn' do
   autostart true
   autorestart true
 
-  command "#{application_root}/.venv/bin/gunicorn app.app:app --bind 127.0.0.1:8000"
+  command "#{application_root}/.venv/bin/gunicorn app.app:app --bind #{node['protocol-hub-api']['bind_address']}"
   directory application_root
   environment(environment)
 
