@@ -71,7 +71,7 @@ supervisor_service 'gunicorn' do
   autostart true
   autorestart true
 
-  command "#{application_root}/.venv/bin/gunicorn app.app:app --bind #{node['protocol-hub-api']['bind_address']}"
+  command "#{application_root}/.venv/bin/gunicorn app.app:app --bind #{node['protocol-hub-api']['bind_address']} -w #{node['protocol-hub-api']['workers']}"
   directory application_root
   environment(environment)
 
