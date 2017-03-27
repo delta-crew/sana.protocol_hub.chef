@@ -12,6 +12,6 @@ server {
     }
 
     location / {
-        try_files $uri /src/client/index.html;
+        try_files $uri /dist/$uri /src/client/index.html;
     }
 }
